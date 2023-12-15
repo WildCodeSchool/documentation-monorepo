@@ -13,19 +13,19 @@
 
 ## Install
 
-```sh
+```bash
 npm install
 ```
 
 ## Usage
 
-```sh
+```bash
 npm run start
 ```
 
 ### Build
 
-```
+```bash
 npm run build
 ```
 
@@ -35,13 +35,13 @@ Cette commande génère du contenu statique dans le répertoire `build` et peut 
 
 Utilisation de SSH :
 
-```
+```bash
 USE_SSH=true npm run deploy
 ```
 
 N'utilise pas SSH :
 
-```
+```bash
 GIT_USER=<Votre nom d'utilisateur GitHub> npm run deploy
 ```
 
