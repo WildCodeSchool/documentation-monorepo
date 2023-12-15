@@ -1,41 +1,69 @@
-# Website
+<h1 align="center">Bienvenue sur doc-template-js 👋</h1>
+<p>
+  <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
+  <img src="https://img.shields.io/badge/node-%3E%3D18.0-blue.svg" />
+  <a href="https://twitter.com/Gorski_anthony" target="_blank">
+    <img alt="Twitter: Gorski_anthony" src="https://img.shields.io/twitter/follow/Gorski_anthony.svg?style=social" />
+  </a>
+</p>
 
-This website is built using [Docusaurus](https://docusaurus.io/), a modern static website generator.
+## Prerequisites
 
-### Installation
+-   node >=18.0
 
+## Install
+
+```sh
+npm install
 ```
-$ yarn
-```
 
-### Local Development
+## Usage
 
+```sh
+npm run start
 ```
-$ yarn start
-```
-
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
 
 ### Build
 
 ```
-$ yarn build
+npm run build
 ```
 
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
+Cette commande génère du contenu statique dans le répertoire `build` et peut être servie par n'importe quel service d'hébergement de contenu statique.
 
 ### Deployment
 
-Using SSH:
+Utilisation de SSH :
 
 ```
-$ USE_SSH=true yarn deploy
+USE_SSH=true npm run deploy
 ```
 
-Not using SSH:
+N'utilise pas SSH :
 
 ```
-$ GIT_USER=<Your GitHub username> yarn deploy
+GIT_USER=<Votre nom d'utilisateur GitHub> npm run deploy
 ```
 
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
+Si vous utilisez les pages GitHub pour l'hébergement, cette commande est un moyen pratique de construire le site web et de le pousser vers la branche `gh-pages`.
+
+## Auteur
+
+👤 **Anthony Gorski**
+
+-   𝕏 - (Twitter): [@Gorski_Anthony](https://twitter.com/Gorski_Anthony)
+-   GitHub: [@GorskiAnthony](https://github.com/GorskiAnthony)
+
+## Affichez votre soutien
+
+## Donnez un ⭐️ si ce projet vous a aidé !
+
+### 🗃️ Version
+
+-   **v1.0.0** - Début de la documentation.
+
+---
+
+### 👋 Qui suis-je ?
+
+Je suis **Anthony Gorski**, développeur web et formateur à la [Wild Code School](https://www.wildcodeschool.com/fr-FR).
