@@ -23,7 +23,7 @@ npm install
 npm run start
 ```
 
-### Build
+## Build
 
 ```bash
 npm run build
@@ -31,7 +31,7 @@ npm run build
 
 Cette commande génère du contenu statique dans le répertoire `build` et peut être servie par n'importe quel service d'hébergement de contenu statique.
 
-### Deployment
+## Deployment
 
 Utilisation de SSH :
 
