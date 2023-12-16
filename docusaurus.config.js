@@ -8,12 +8,12 @@ import { themes as prismThemes } from "prism-react-renderer";
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-	title: "Prise en main du template de la wild",
+	title: "Prise en main du framework JS - Template",
 	tagline: "La documentation ultime pour la prise en main du template JS",
 	favicon: "img/favicon.ico",
 
 	// Set the production url of your site here
-	url: "https://your-docusaurus-site.example.com",
+	url: "https://documentation-js-template.vercel.app",
 	// Set the /<baseUrl>/ pathname under which your site is served
 	// For GitHub pages deployment, it is often '/<projectName>/'
 	baseUrl: "/",
@@ -44,7 +44,7 @@ const config = {
 					// Please change this to your repo.
 					// Remove this to remove the "edit this page" links.
 					editUrl:
-						"https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/",
+						"https://github.com/WildCodeSchool/js-template-fullstack/",
 				},
 
 				theme: {
