@@ -44,7 +44,7 @@ const config = {
 					// Please change this to your repo.
 					// Remove this to remove the "edit this page" links.
 					editUrl:
-						"https://github.com/WildCodeSchool/js-template-fullstack/",
+						"https://github.com/GorskiAnthony/documentation-js-template/blob/main/",
 				},
 
 				theme: {
@@ -57,13 +57,11 @@ const config = {
 	themeConfig:
 		/** @type {import('@docusaurus/preset-classic').ThemeConfig} */
 		({
-			// Replace with your project's social card
-			image: "img/docusaurus-social-card.jpg",
 			navbar: {
 				title: "Template JS - Documentation",
 				logo: {
-					alt: "My Site Logo",
-					src: "img/logo.svg",
+					alt: "logo wild code school",
+					src: "img/wcs.png",
 				},
 				items: [
 					{
@@ -96,7 +94,7 @@ const config = {
 						items: [
 							{
 								label: "Github",
-								href: "https://github.com/WildCodeSchool/js-template-fullstack",
+								href: "https://github.com/WildCodeSchool/documentation-js-template/",
 							},
 							{
 								label: "Twitter",

@@ -25,7 +25,7 @@ export default function Home() {
 	return (
 		<Layout
 			title={`${siteConfig.title}`}
-			description="Prise en main du template js de la wild code school"
+			description="Débuter avec le framework js de la wild code school"
 		>
 			<HomepageHeader />
 			<main>
