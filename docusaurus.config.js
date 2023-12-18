@@ -8,7 +8,7 @@ import { themes as prismThemes } from "prism-react-renderer";
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-	title: "Prise en main du framework JS - Template",
+	title: "Framework JS - Documentation",
 	tagline: "La documentation ultime pour la prise en main du template JS",
 	favicon: "img/favicon.ico",
 
