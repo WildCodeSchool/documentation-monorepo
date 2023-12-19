@@ -50,9 +50,9 @@ backend
 ### 1. **database**
 
 -   **client.js**: Configuration du client de base de données.
-    -   Ce fichier permet de se connecter à la base de données et d'exécuter des requêtes SQL.
+    -   Ce fichier permet de se connecter à la base de données.
 -   **schema.sql**: Définition du schéma de la base de données.
-    -   Est simplement la structure de notre base de données, définissant les tables et les colonnes.
+    -   Ce fichier est simplement la structure de notre base de données, définissant les tables et les colonnes.
 
 ### 2. **src**
 
