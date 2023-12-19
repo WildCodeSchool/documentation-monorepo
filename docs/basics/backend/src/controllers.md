@@ -19,7 +19,7 @@ const tables = require("../tables");
 ```
 
 :::info
-Nous allons parler de `tables` prochainement, mais sachez que c'est un objet qui permets d'accéder aux méthodes CRUD de la base de données de l'entité que vous souhaitez gérer.
+Ici, tables est un objet qui contient les instances de nos gestionnaires de tables. Nous allons voir cela plus en détail dans la section [tables.js](/docs/basics/backend/src/tables).
 :::
 
 ## Opérations des Contrôleurs

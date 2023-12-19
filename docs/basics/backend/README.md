@@ -61,6 +61,7 @@ backend
 -   **models**: Modèles définissant la structure des données.
 -   **router.js**: Routage pour les points d'API.
 -   **services**: Services fournissant des fonctionnalités spécifiques.
+    -   Ce dossier contient des fichiers tels que les middlewares, les validateurs, etc.
 -   **tables.js**: Gestionnaires de données pour notre database.
 
 ### 3. **public**
