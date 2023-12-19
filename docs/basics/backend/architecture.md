@@ -88,3 +88,5 @@ backend
 -   **Évolutivité et Flexibilité**: La structure est conçue pour s'adapter à l'évolution des exigences du projet, offrant flexibilité et extensibilité.
 
 Cette architecture a été pensée pour optimiser le développement, assurer la maintenabilité du code et permettre une évolution continue de notre application backend. N'hésitez pas à explorer chaque dossier pour une compréhension approfondie de notre structure organisée et efficace.
+
+Parlons maintenant de notre dossier `src` et plus particulièrement du fichier `app.js`.

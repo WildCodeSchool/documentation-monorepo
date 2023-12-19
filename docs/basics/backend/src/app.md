@@ -1,6 +1,8 @@
 ---
-sidebar_position: 2
-sidebar_label: Dossier src
+sidebar_position: 1
+sidebar_label: app.js
+pagination_label: src/app.js
+description: Prise en main du fichier app.js
 ---
 
 # Parlons du dossier `src`
@@ -27,7 +29,7 @@ src
 └── tables.js
 ```
 
-## 1. `app.js`
+## `app.js`
 
 Ce fichier est le point d'entrée de notre application. Il permet de mettre en place notre serveur et d'orchestrer les différentes parties de notre application.
 
@@ -48,7 +50,7 @@ module.exports = app;
 
 Voilà la syntaxe de base de notre fichier `app.js`. Nous importons Express, nous créons une instance de notre application, nous importons notre fichier `router.js` et nous exportons notre application qui sera utilisée dans notre fichier `index.js`.
 
-### 1.1 les cors
+### 1 les cors
 
 Les `CORS`, acronyme de Cross-Origin Resource Sharing, représentent un mécanisme qui permet à des ressources d'une page web d'être chargées à partir d'un **autre** domaine que celui de la page courante. Par défaut, les navigateurs web bloquent les tentatives de chargement de ressources provenant de domaines différents.
 
@@ -91,7 +93,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 ```
 
-### 1.2 express.json()
+### 2 express.json()
 
 Nous avons besoin d'ajouter un `middleware` pour que notre application puisse lire les données envoyées par le client. Pour cela, nous allons utiliser le middleware `express.json()`. Tant que le type de données envoyées par le client est `application/json`, le middleware `express.json()` va transformer les données en objet JavaScript et les ajouter à la propriété `body` de l'objet `request`.
 
@@ -134,7 +136,7 @@ Il n'y a pas que `express.json()`, mais bien d'autres middlewares comme pas exem
 
 :::
 
-### 1.3 `cookie-parser`
+### 3 `cookie-parser`
 
 Les cookies sont de petits fragments de données stockés dans le navigateur du client, couramment utilisés pour sauvegarder des informations spécifiques à l'utilisateur ou des données de session.
 
@@ -199,7 +201,7 @@ res.cookie("username", "john", {
 res.clearCookie("username");
 ```
 
-### 1.4 Middleware de Gestion des Erreurs
+### 4 Middleware de Gestion des Erreurs
 
 Un middleware de gestion des erreurs est une composante essentielle dans une application Express, permettant de capturer et de traiter les erreurs survenues lors du traitement des requêtes. Ce middleware devrait être défini en dernier, après les autres appels à `app.use()` et aux routes.
 
