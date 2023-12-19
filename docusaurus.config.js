@@ -68,7 +68,7 @@ const config = {
 						type: "docSidebar",
 						sidebarId: "tutorialSidebar",
 						position: "left",
-						label: "Tutorial",
+						label: "Introduction",
 					},
 					{
 						href: "https://github.com/WildCodeSchool/js-template-fullstack",
