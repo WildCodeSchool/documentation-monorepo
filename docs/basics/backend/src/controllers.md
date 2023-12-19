@@ -19,7 +19,7 @@ const tables = require("../tables");
 ```
 
 :::info
-Nous allons parler de `tables` prochainement, mais sachez que c'est un objet qui permets d'accéder aux tables de notre base de données.
+Nous allons parler de `tables` prochainement, mais sachez que c'est un objet qui permets d'accéder aux méthodes CRUD de la base de données de l'entité que vous souhaitez gérer.
 :::
 
 ## Opérations des Contrôleurs
@@ -107,12 +107,12 @@ const destroy = async (req, res, next) => {
 };
 ```
 
-:::info
+:::note
 Toutes les fonctions ci-dessus utilisent la fonction `next` pour passer les erreurs à la fonction de gestion des erreurs Express. Nous avons vu cela plus en détail dans la section [Gestion des Erreurs](/docs/basics/backend/src/app#middleware-de-gestion-des-erreurs).
 :::
 
-:::note
-`<entity>` est le nom de l'entité que vous souhaitez gérer. Par exemple, si votre table de votre database vaut `user` pour gérer les utilisateurs, vous devez remplacer `<entity>` par `user`.
+:::info
+`<entity>` est le nom de l'entité que vous souhaitez gérer. Par exemple, si vous souhaitez accéder au CRUD de votre table `user` pour gérer les utilisateurs, vous devez remplacer `<entity>` par `user`.
 :::
 
 ## Utilisation
