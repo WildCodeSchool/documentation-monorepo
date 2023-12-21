@@ -1,7 +1,7 @@
 ---
-sidebar_position: 4
+sidebar_position: 3
 sidebar_label: tables.js
-pagination_label: src/table.js
+pagination_label: src/tables.js
 description: Prise en main du fichier tables.js
 ---
 
@@ -11,7 +11,7 @@ Ce fichier contient un script qui facilite l'enregistrement des gestionnaires de
 
 ### Importation des Modules de Gestionnaires
 
-```js
+```js title="backend/src/tables.js"
 // Importer les modules des gestionnaires responsables des opérations sur les tables
 const ItemManager = require("./models/ItemManager");
 
@@ -25,7 +25,7 @@ Cette section importe les modules des gestionnaires responsables de traiter les 
 
 ### Initialisation de l'Objet des Gestionnaires de Tables
 
-```js
+```js title="backend/src/tables.js"
 // Créer un objet vide pour stocker les gestionnaires de données pour différentes tables
 const tables = {};
 ```
@@ -34,7 +34,7 @@ Un objet vide `tables` est créé. Cet objet sera utilisé pour stocker les inst
 
 ### Enregistrement des Gestionnaires
 
-```js
+```js title="backend/src/tables.js"
 // Enregistrer chaque gestionnaire comme point d'accès aux données pour sa table respective
 managers.forEach((ManagerClass) => {
 	const manager = new ManagerClass();
@@ -47,7 +47,7 @@ Chaque gestionnaire est enregistré comme point d'accès aux données pour sa ta
 
 :::info
 
-```js
+```js title="backend/src/tables.js"
 const manager = new ManagerClass();
 
 tables[manager.table] = manager;
@@ -55,13 +55,13 @@ tables[manager.table] = manager;
 
 est équivalent à
 
-```js
+```js title="backend/src/tables.js"
 tables["item"] = new ItemManager();
 ```
 
 C'est grâce à cela, que dans nos controllers, nous pouvons accéder à nos gestionnaires de données de la manière suivante :
 
-```js
+```js title="backend/src/tables.js"
 const browse = async (req, res, next) => {
 	try {
 		const items = await tables.item.readAll();
@@ -76,7 +76,7 @@ const browse = async (req, res, next) => {
 
 ### Utilisation d'un Proxy pour la Personnalisation des Erreurs
 
-```js
+```js title="backend/src/tables.js"
 // Exporter l'instance du Proxy avec une gestion d'erreur personnalisée
 module.exports = new Proxy(tables, {
 	get(obj, prop) {
