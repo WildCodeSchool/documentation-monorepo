@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: 4
 sidebar_label: controllers
 pagination_label: src/controllers
 description: Parlons des controllers
