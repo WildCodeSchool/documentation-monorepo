@@ -36,7 +36,7 @@ La gestion de la base de données est assurée par `client.js` et le schéma SQL
 Le fichier `seed.js` est un script de développement qui permet de remplir la base de données avec des données de test. Il n'est pas nécessaire de l'exécuter pour le fonctionnement du projet.
 :::
 
-## Code Source du Backend
+### Code Source
 
 Dans le cœur du backend, le fichier `app.js` assume un rôle central, orchestrant les fonctionnalités principales. Le point d'entrée de notre backend est défini dans le fichier `index.js`, offrant une perspective claire sur l'ensemble de l'application. Nous assurons la qualité du code grâce à une configuration Jest élaborée dans le fichier `jest.config.js`.
 
@@ -45,6 +45,8 @@ L'architecture modulaire, basée sur le modèle `MVC`, structure notre backend d
 ### Tests
 
 Le répertoire `tests` est dédié aux tests, avec des fichiers spécifiques pour les managers et les routes.
+
+Pour nos tests, nous utilisons `supertest` pour les requêtes HTTP, `jest` pour les tests unitaires.
 
 ## Frontend
 
