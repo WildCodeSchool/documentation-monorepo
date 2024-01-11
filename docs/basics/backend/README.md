@@ -11,7 +11,7 @@ Bienvenue dans l'architecture backend de notre application, conçue pour offrir 
 
 ## Architecture
 
-```txt
+```textmate title="backend/"
 backend
 ├── database
 │   ├── client.js
@@ -45,7 +45,7 @@ backend
 11 directories, 19 files
 ```
 
-### Explication de l'architecture
+### Détails
 
 ### 1. **database**
 
