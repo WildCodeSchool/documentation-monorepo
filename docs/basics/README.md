@@ -1,6 +1,6 @@
 ---
 sidebar_position: 1
-sidebar_label: Frontend
+sidebar_label: README.md
 ---
 
 # README
