@@ -86,12 +86,12 @@ const config = {
             items: [
               {
                 label: "Tutorial",
-                to: "/docs/intro",
+                to: "/docs/architecture-monorepo",
               },
             ],
           },
           {
-            title: "Community",
+            title: "Communauté",
             items: [
               {
                 label: "Github",
@@ -104,7 +104,7 @@ const config = {
             ],
           },
           {
-            title: "Author",
+            title: "Auteur",
             items: [
               {
                 label: "𝕏: @GorskiAnthony",
@@ -117,7 +117,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} Template JS Doc, Inc. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} Hackathon Doc, Inc. Built with Docusaurus.`,
       },
       prism: {
         theme: prismThemes.github,
