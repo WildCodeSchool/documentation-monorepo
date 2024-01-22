@@ -8,8 +8,9 @@ const FeatureList = [
     Svg: require("@site/static/img/undraw_front.svg").default,
     description: (
       <>
-        Nous allons voir comment le frontend (REACT) et conçu et comment
-        l'utiliser correctement.
+        Explorez la conception du frontend avec Harmonia, un framework utilisant
+        React coté frontend, et découvrez comment l'utiliser de manière
+        appropriée.
       </>
     ),
   },
@@ -18,8 +19,8 @@ const FeatureList = [
     Svg: require("@site/static/img/undraw_api.svg").default,
     description: (
       <>
-        Nous allons faire communiquer nos deux parties (Frontend/Backend) via
-        une API afin de pouvoir utiliser notre application.
+        Facilitez la communication entre les parties Frontend et Backend de
+        notre application Harmonia en utilisant une API REST.
       </>
     ),
   },
@@ -28,8 +29,8 @@ const FeatureList = [
     Svg: require("@site/static/img/undraw_back.svg").default,
     description: (
       <>
-        Nous allons voir comment le backend (Express) et conçu et comment
-        l'utiliser correctement.
+        Explorez la conception du backend avec Harmonia, basé sur le micro
+        framework Express, et découvrez comment l'utiliser de manière adéquate.
       </>
     ),
   },
