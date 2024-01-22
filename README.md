@@ -31,22 +31,6 @@ npm run build
 
 Cette commande génère du contenu statique dans le répertoire `build` et peut être servie par n'importe quel service d'hébergement de contenu statique.
 
-## Deployment
-
-Utilisation de SSH :
-
-```bash
-USE_SSH=true npm run deploy
-```
-
-N'utilise pas SSH :
-
-```bash
-GIT_USER=<Votre nom d'utilisateur GitHub> npm run deploy
-```
-
-Si vous utilisez les pages GitHub pour l'hébergement, cette commande est un moyen pratique de construire le site web et de le pousser vers la branche `gh-pages`.
-
 ## Auteur
 
 👤 **Anthony Gorski**
