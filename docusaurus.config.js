@@ -8,9 +8,9 @@ import { themes as prismThemes } from "prism-react-renderer";
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "Harmonie - Documentation",
+  title: "Harmonia - Documentation",
   tagline:
-    "Prise en main du framework Harmonie proposé par la Wild Code School",
+    "Prise en main du framework Harmonia proposé par la Wild Code School",
   favicon: "img/favicon.ico",
 
   // Set the production url of your site here
@@ -22,7 +22,7 @@ const config = {
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: "Anthony Gorski", // Usually your GitHub org/user name.
-  projectName: "Harmonie", // Usually your repo name.
+  projectName: "Harmonia", // Usually your repo name.
 
   onBrokenLinks: "ignore",
   onBrokenMarkdownLinks: "warn",
@@ -59,7 +59,7 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-        title: "Harmonie - Documentation",
+        title: "Harmonia - Documentation",
         logo: {
           alt: "logo wild code school",
           src: "img/wcs.png",
