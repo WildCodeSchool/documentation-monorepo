@@ -64,14 +64,6 @@ server
 -   **services**: Services fournissant des fonctionnalités spécifiques.
     -   Ce dossier contient des fichiers tels que les middlewares, les validateurs, etc.
 
-:::note
-Le router se divise en plusieurs parties, en effet, pour une meilleure organisation, chaque partie du router est séparée dans un dossier spécifique. Ces dossiers contiendront des fichiers `router.js` sont ensuite importés dans le fichier principal `router.js`.
-
-Ex: `routers/api/items/router.js`, `routers/api/users/router.js`, `routers/api/auth/router.js`, etc.
-
-Le fichier `router.js` principal se trouve dans `routers/api/router.js` et importe tous les autres fichiers `router.js` des dossiers spécifiques.
-:::
-
 ### 2. **bin**
 
 -   **migrate.js**: Script pour créer les tables de la base de données contenues dans `database/schema.sql`.

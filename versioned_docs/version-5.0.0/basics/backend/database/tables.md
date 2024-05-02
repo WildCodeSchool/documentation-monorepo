@@ -1,7 +1,7 @@
 ---
-sidebar_position: 3
+sidebar_position: 2
 sidebar_label: tables.js
-pagination_label: src/tables.js
+pagination_label: app/database/tables.js
 description: Prise en main du fichier tables.js
 ---
 
@@ -11,21 +11,16 @@ Ce fichier contient un script qui facilite l'enregistrement des gestionnaires de
 
 ### Importation des Modules de Gestionnaires
 
-```js title="backend/src/tables.js"
+```js title="server/app/database/tables.js"
 // Importer les modules des gestionnaires responsables des opérations sur les tables
-const ItemManager = require("./models/ItemManager");
-
-const managers = [
-	ItemManager,
-	// Ajouter d'autres gestionnaires ici
-];
+const ItemRepository = require("./models/ItemRepository");
 ```
 
-Cette section importe les modules des gestionnaires responsables de traiter les opérations de données sur les tables. Vous pouvez étendre le tableau `managers` en ajoutant d'autres gestionnaires pour différentes tables.
+Cette section importe les modules des gestionnaires responsables de traiter les opérations de données sur les tables.
 
 ### Initialisation de l'Objet des Gestionnaires de Tables
 
-```js title="backend/src/tables.js"
+```js title="server/app/database/tables.js"
 // Créer un objet vide pour stocker les gestionnaires de données pour différentes tables
 const tables = {};
 ```
@@ -34,49 +29,14 @@ Un objet vide `tables` est créé. Cet objet sera utilisé pour stocker les inst
 
 ### Enregistrement des Gestionnaires
 
-```js title="backend/src/tables.js"
+```js title="server/app/database/tables.js"
 // Enregistrer chaque gestionnaire comme point d'accès aux données pour sa table respective
-managers.forEach((ManagerClass) => {
-	const manager = new ManagerClass();
-
-	tables[manager.table] = manager;
-});
+tables.item = new ItemRepository();
 ```
-
-Chaque gestionnaire est enregistré comme point d'accès aux données pour sa table respective. La boucle `forEach` crée une instance de chaque gestionnaire et l'ajoute à l'objet `tables` avec la propriété `table` de l'instance du gestionnaire comme clé.
-
-:::info
-
-```js title="backend/src/tables.js"
-const manager = new ManagerClass();
-
-tables[manager.table] = manager;
-```
-
-est équivalent à
-
-```js title="backend/src/tables.js"
-tables["item"] = new ItemManager();
-```
-
-C'est grâce à cela, que dans nos controllers, nous pouvons accéder à nos gestionnaires de données de la manière suivante :
-
-```js title="backend/src/tables.js"
-const browse = async (req, res, next) => {
-	try {
-		const items = await tables.item.readAll();
-		res.json(items);
-	} catch (err) {
-		next(err);
-	}
-};
-```
-
-:::
 
 ### Utilisation d'un Proxy pour la Personnalisation des Erreurs
 
-```js title="backend/src/tables.js"
+```js title="server/app/database/tables.js"
 // Exporter l'instance du Proxy avec une gestion d'erreur personnalisée
 module.exports = new Proxy(tables, {
 	get(obj, prop) {
@@ -96,5 +56,5 @@ Dans cette section, une instance de Proxy est créée avec l'objet `tables` comm
 ---
 
 :::note
-En résumé, ce fichier simplifie l'enregistrement des gestionnaires de données. Il suffit de déclarer nos gestionnaires ici `(ItemManager par exemple)` et ils seront pris en compte dans l'ensemble de notre projet.
+En résumé, ce fichier simplifie l'enregistrement des gestionnaires de données. Il suffit de déclarer nos gestionnaires ici `(ItemRepository par exemple)` et ils seront pris en compte dans l'ensemble de notre projet.
 :::
