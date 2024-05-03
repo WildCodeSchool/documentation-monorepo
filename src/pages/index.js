@@ -15,18 +15,12 @@ function HomepageHeader() {
 					{siteConfig.title}
 				</Heading>
 				<p className="hero__subtitle">{siteConfig.tagline}</p>
-				<div>
-					<a
-						href="docs/architecture-monorepo"
-						className={clsx(
-							useColorMode().colorMode === "light"
-								? styles.getStartedLight
-								: styles.getStartedDark
-						)}
-					>
-						Accéder à la documentation
-					</a>
-				</div>
+				<a
+					href="docs/architecture-monorepo"
+					className={styles.getStarted}
+				>
+					Accéder à la documentation
+				</a>
 			</div>
 		</header>
 	);
