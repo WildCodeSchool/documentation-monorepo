@@ -72,7 +72,7 @@ const config = {
 						label: "Introduction",
 					},
 					{
-						href: "https://github.com/WildCodeSchool/js-template-fullstack",
+						href: "https://github.com/WildCodeSchool/create-harmonia",
 						label: "GitHub",
 						position: "right",
 					},
