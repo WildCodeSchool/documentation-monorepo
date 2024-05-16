@@ -95,7 +95,7 @@ const config = {
 						items: [
 							{
 								label: "Github",
-								href: "https://github.com/WildCodeSchool/documentation-js-template/",
+								href: "https://github.com/WildCodeSchool/documentation-harmonia",
 							},
 							{
 								label: "Twitter",
