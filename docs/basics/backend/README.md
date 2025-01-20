@@ -1,68 +1,71 @@
 ---
 sidebar_position: 1
-sidebar_label: Backend
+sidebar_label: Server
 ---
 
 # Architecture
 
-## Introduction à l'Architecture du Backend
+## Introduction à l'Architecture du Server
 
-Bienvenue dans l'architecture backend de notre application, conçue pour offrir des fonctionnalités robustes et une gestion efficace des données. Cette structure, soigneusement organisée, garantit une expérience de développement fluide et une maintenance simplifiée. Plongeons dans les différentes composantes de notre dossier backend.
+Bienvenue dans l'architecture server de notre application, conçue pour offrir des fonctionnalités robustes et une gestion efficace des données. Cette structure, soigneusement organisée, garantit une expérience de développement fluide et une maintenance simplifiée. Plongeons dans les différentes composantes de notre dossier server.
 
 ## Architecture
 
-```textmate title="backend/"
-backend
+```textmate title="server/"
+server
+├── bin
+│   ├── migrate.ts
+│   └── seed.ts
 ├── database
-│   ├── client.js
+│   ├── checkConnection.ts
+│   ├── client.ts
+│   ├── fixtures
+│   │   ├── AbstractSeeder.ts
+│   │   ├── ItemSeeder.ts
+│   │   └── UserSeeder.ts
 │   └── schema.sql
-├── index.js
 ├── jest.config.js
-├── migrate.js
-├── package-lock.json
 ├── package.json
 ├── public
 │   └── assets
 │       └── images
 │           └── favicon.png
-├── seed.js
 ├── src
-│   ├── app.js
-│   ├── controllers
-│   │   └── itemControllers.js
-│   ├── models
-│   │   ├── AbstractManager.js
-│   │   └── ItemManager.js
-│   ├── router.js
-│   ├── services
-│   └── tables.js
-└── tests
-    ├── items
-    │   ├── manager.spec.js
-    │   └── routes.spec.js
-    └── setup.js
-
-11 directories, 19 files
+│   ├── app.ts
+│   ├── main.ts
+│   ├── modules
+│   │   └── item
+│   │       ├── itemActions.ts
+│   │       └── itemRepository.ts
+│   ├── router.ts
+│   └── types
+│       └── express
+│           └── index.d.ts
+├── tests
+│   ├── install.test.ts
+│   └── item
+│       └── routes.spec.ts
+└── tsconfig.json
 ```
 
 ### Détails
 
 ### 1. **database**
 
--   **client.js**: Configuration du client de base de données.
+-   **client.ts**: Configuration du client de base de données.
     -   Ce fichier permet de se connecter à la base de données.
+-   **checkConnection.ts**: Vérification de la connexion à la base de données.
+    -   Ce fichier permet de vérifier si la connexion à la base de données est établie.
 -   **schema.sql**: Définition du schéma de la base de données.
     -   Ce fichier est simplement la structure de notre base de données, définissant les tables et les colonnes.
 
 ### 2. **src**
 
--   **app.js**: Organise et orchestre les différentes parties.
--   **controllers**: Gestionnaires des requêtes et de la logique métier.
--   **models**: Modèles définissant la structure des données.
--   **router.js**: Routage pour les points d'API.
--   **services**: Services fournissant des fonctionnalités spécifiques.
-    -   Ce dossier contient des fichiers tels que les middlewares, les validateurs, etc.
--   **tables.js**: Gestionnaires de données pour notre database.
+-   **main.ts**: Point d'entrée de l'application.
+-   **app.ts**: Organise et orchestre les différentes parties.
+-   **router.ts**: Routage pour les points d'API.
+-   **modules**: Contiendra le repository & les actions des mes données.
+-   **types**: Définitions de types personnalisées.
 
 ### 3. **public**
 
@@ -72,11 +75,10 @@ backend
 
 -   Tests unitaires et de bout en bout organisés par fonctionnalité.
 
-### 5. **index.js** / **migrate.js** / **seed.js**
+### 5. **bin**
 
--   **index.js**: Point d'entrée de l'application, celui-ci fera appel à `src/app.js`.
--   **migrate.js**: Script pour créer les tables de la base de données contenues dans `database/schema.sql`.
--   **seed.js**: Script pour insérer des données dans la base de données.
+-   **migrate.ts**: Script pour créer les tables de la base de données contenues dans `database/schema.sql`.
+-   **seed.ts**: Script pour insérer des données dans la base de données.
 
 ## Points Clés
 
@@ -88,6 +90,6 @@ backend
 
 -   **Évolutivité et Flexibilité**: La structure est conçue pour s'adapter à l'évolution des exigences du projet, offrant flexibilité et extensibilité.
 
-Cette architecture a été pensée pour optimiser le développement, assurer la maintenabilité du code et permettre une évolution continue de notre application backend. N'hésitez pas à explorer chaque dossier pour une compréhension approfondie de notre structure organisée et efficace.
+Cette architecture a été pensée pour optimiser le développement, assurer la maintenabilité du code et permettre une évolution continue de notre application server. N'hésitez pas à explorer chaque dossier pour une compréhension approfondie de notre structure organisée et efficace.
 
-Parlons maintenant de notre dossier `src` et plus particulièrement du fichier `app.js`.
+Parlons maintenant de notre dossier `src` et plus particulièrement du fichier `app.ts`.
