@@ -14,87 +14,63 @@ Il est préconfiguré avec un ensemble d'outils qui aideront les étudiants à p
 
 ### Utilisateurs de Windows
 
-Assurez-vous d'exécuter ces commandes dans un terminal git pour éviter les [problèmes avec les formats de nouvelles lignes] (https://en.wikipedia.org/wiki/Newline#Issues_with_different_newline_formats) :
+Assurez-vous d'exécuter ces commandes dans un terminal git pour éviter les [problèmes avec les formats de nouvelles lignes](https://en.wikipedia.org/wiki/Newline#Issues_with_different_newline_formats) :
 
 ```
 git config --global core.eol lf
 git config --global core.autocrlf false
 ```
-### Initialisation du projet
 
-- Dans VSCode, installez les plugins **Prettier - Code formatter** et **ESLint** et configurez-les.
-- Clonez ce repo, entrez-y
-- Exécuter la commande `npm install`
-- Créez des fichiers d'environnement (`.env`) dans le `backend` et le `frontend` : vous pouvez copier les fichiers `.env.sample` pour commencer (**ne les supprimez pas**).
+## Installation & Utilisation
 
-### Commandes disponibles
+1. Installez le plugin **Biome** dans VSCode et configurez-le.
+2. Clonez ce dépôt, puis accédez au répertoire cloné.
+3. Exécutez la commande `npm install`.
+4. Créez des fichiers d'environnement (`.env`) dans les répertoires `server` et `client` : vous pouvez copier les fichiers `.env.sample` comme modèles (**ne les supprimez pas**).
 
-- `db:migrate` : Exécute le script de migration de base de données
-- `db:seed` : Exécute le script d'amorçage de la base de données
-- `dev` : Démarre les deux serveurs (frontend + backend) dans un seul terminal
-- `dev-front` : Démarre le serveur React frontend
-- `dev-back` : Démarre le serveur backend Express
-- `lint` : Exécute les outils de validation (sera exécuté à chaque _commit_, et refusera le code impur)
+### Commandes de Base
+
+| Commande             | Description                                                         |
+| -------------------- | ------------------------------------------------------------------- |
+| `npm install`        | Installe les dépendances pour le client et le serveur               |
+| `npm run db:migrate` | Met à jour la base de données à partir d'un schéma défini           |
+| `npm run dev`        | Démarre les deux serveurs (client et serveur) dans un seul terminal |
+| `npm run check`      | Exécute les outils de validation (linting et formatage)             |
+| `npm run test`       | Exécute les tests unitaires et d'intégration                        |
 
 ## FAQ
 
-### Outils
+### Déploiement avec Traefik
 
-- _Concurrently_ : Permet à plusieurs commandes de s'exécuter simultanément dans le même CLI
-- Husky_ : Permet d'exécuter des commandes spécifiques qui se déclenchent sur des événements _git_.
-- Vite_ : Alternative à _Create-React-App_, avec moins d'outils pour une expérience plus fluide.
-- _ESLint_ : Outil de "qualité du code", assure que les règles choisies seront appliquées
-- Prettier_ : Outil de "qualité du code" également, se concentre sur le guide de style
-- Airbnb Standard_ : L'un des "standards" les plus connus, même s'il n'est pas officiellement lié à ES/JS.
+> ⚠️ Prérequis : Vous devez avoir installé et configuré Traefik sur votre VPS au préalable. Suivez les instructions ici : [VPS Traefik Starter Kit](https://github.com/WildCodeSchool/vps-traefik-starter-kit/).
 
-## Déploiement avec Traefik
+Pour le déploiement, ajoutez les secrets suivants dans la section `secrets` → `actions` du dépôt GitHub :
 
+-   `SSH_HOST` : Adresse IP de votre VPS
+-   `SSH_USER` : Identifiant SSH pour votre VPS
+-   `SSH_PASSWORD` : Mot de passe de connexion SSH pour votre VPS
 
-> ⚠️ Conditions préalables : Vous devez avoir installé et configuré Traefik sur votre VPS au préalable.
-> https://github.com/WildCodeSchool/vps-traefik-starter-kit/
+Et une variable publique dans `/settings/variables/actions` :
 
+-   `PROJECT_NAME` : Le nom du projet utilisé pour créer le sous-domaine.
 
-Pour le déploiement, vous devez aller dans `secrets` → app `actions` sur le repo github pour insérer via `New repository secret` :
+> ⚠️ Avertissement : Les underscores ne sont pas autorisés car ils peuvent causer des problèmes avec le certificat Let's Encrypt.
 
+L'URL de votre projet sera `https://${PROJECT-NAME}.${subdomain}.wilders.dev/`.
 
-- SSH_HOST : adresse IP de votre VPS
-- SSH_USER : login SSH de votre VPS
-- SSH_PASSWORD : Mot de passe de connexion SSH à votre VPS
+### Variables d'environnement spécifiques
 
+Les étudiants doivent utiliser le modèle fourni dans le fichier `*.env.sample*` en suivant la convention `<PROJECT_NAME><SPECIFIC_NAME>=<THE_VARIABLE>`.
 
-Et une variable publique de l'onglet `/settings/variables/actions` :
+> ⚠️ **Avertissement:** Le `PROJECT_NAME` doit correspondre à celui utilisé dans la variable publique Git.
 
+Pour l'ajouter lors du déploiement, suivez ces deux étapes :
 
-- PROJECT_NAME : le nom du projet utilisé pour créer le sous-domaine.
+1. Ajoutez la variable correspondante dans le fichier `docker-compose.prod.yml` (comme montré dans l'exemple : `PROJECT_NAME_SPECIFIC_NAME: ${PROJECT_NAME_SPECIFIC_NAME}`).
+2. Connectez-vous à votre serveur via SSH. Ouvrez le fichier `.env` global dans Traefik (`nano ./traefik/data/.env`). Ajoutez la variable avec la valeur correcte et sauvegardez le fichier.
 
+Après cela, vous pouvez lancer le déploiement automatique. Docker ne sera pas rafraîchi pendant ce processus.
 
-> ⚠️ Attention : les underscores ne sont pas autorisés. Ils peuvent causer des problèmes avec le certificat let's encrypt
+### Logs
 
-
-Utilisez ce même onglet pour ajouter les autres variables d'environnement nécessaires au projet s'il y en a.
-
-
-Seul le backend sera accessible. Le chemin racine `"/"` redirigera vers le dossier dist de votre frontend. Afin de permettre cela, veuillez décommenter la ligne comme expliqué dans `backend/src/app.js` (Ligne 102).
-Comme le backend servira le frontend, la variable globale VITE_BACKEND_URL sera définie avec une chaîne vide.
-
-
-Votre URL sera ` https://${PROJECT-NAME}.${subdomain}.wilders.dev/`.
-
-
-### A propos de la base de données
-
-
-La base de données est automatiquement déployée avec le nom de votre repo. Pendant la construction du projet (`docker-entry.sh`), la commande `node migrate.js` est exécutée dans le backend. Si vous voulez ensemencer automatiquement votre base de données en utilisant le script `seed.js`, remplacez la commande _build_ sur votre `backend/package.json` par `node migrate.js && node seed.js`.
-
-
-### A propos des ressources publiques (images, polices...)
-
-
-N'utilisez pas de dossier public sur votre frontend. Ce dossier ne sera pas accessible en ligne. Vous pouvez déplacer vos ressources publiques dans le dossier `backend/public`. Préférez [static assets](https://vitejs.dev/guide/assets) lorsque c'est possible.
-
-
-### A propos des logs
-
-
-Si vous voulez accéder aux logs de votre projet en ligne (pour suivre le déploiement ou pour surveiller une erreur de bug), connectez-vous à votre VPS (`ssh user@host`).
-Ensuite, allez sur votre projet spécifique et lancez `docker compose logs -t -f.
+Pour accéder aux logs de votre projet en ligne (pour suivre le déploiement ou surveiller les erreurs), connectez-vous à votre VPS (`ssh user@host`). Ensuite, allez dans votre projet spécifique et exécutez `docker compose logs -t -f`.
