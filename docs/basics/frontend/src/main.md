@@ -1,17 +1,17 @@
 ---
 sidebar_position: 1
-sidebar_label: main.jsx
-pagination_label: src/main.jsx
-description: Prise en main du fichier main.jsx
+sidebar_label: main.tsx
+pagination_label: src/main.tsx
+description: Prise en main du fichier main.tsx
 ---
 
-# main.jsx
+# main.tsx
 
-Ce fichier est le point d'entrée principal de l'application. Il est responsable de l'initialisation de l'application et de l'insertion de l'élément racine dans le DOM. 
+Ce fichier est le point d'entrée principal de l'application. Il est responsable de l'initialisation de l'application et de l'insertion de l'élément racine dans le DOM.
 
-```jsx title="frontend/src/main.jsx"
-import React from "react";
-import ReactDOM from "react-dom/client";
+```tsx title="client/src/main.tsx"
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
 
 // Nous utilisons le package react-router-dom pour gérer les routes de notre application
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -21,20 +21,25 @@ import App from "./App";
 
 // Création de notre router
 const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-  },
+	{
+		path: "/",
+		element: <App />,
+	},
 ]);
 
 // Insertion de notre élément racine dans le DOM
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const rootElement = document.getElementById("root");
+if (rootElement == null) {
+	throw new Error(
+		`Your HTML Document should contain a <div id="root"></div>`
+	);
+}
 
 // Rendu de notre application
-root.render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+createRoot(rootElement).render(
+	<StrictMode>
+		<RouterProvider router={router} />
+	</StrictMode>
 );
 ```
 
@@ -44,7 +49,7 @@ Nous utilisons le package `react-router-dom` pour gérer les routes de notre app
 
 Mais pas seulement, il nous permet également de gérer la navigation entre les différentes routes de notre application.
 
-```jsx title="frontend/src/main.jsx"
+```jsx title="frontend/src/main.tsx"
 import { createBrowserRouter } from "react-router-dom";
 
 /**
@@ -54,10 +59,10 @@ import { createBrowserRouter } from "react-router-dom";
  */
 
 const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-  },
+	{
+		path: "/",
+		element: <App />,
+	},
 ]);
 ```
 
