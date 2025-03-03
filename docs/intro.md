@@ -6,70 +6,103 @@ sidebar_position: 1
 
 # Introduction
 
-Bienvenue dans la présentation détaillée de l'architecture de notre monorepo, un écosystème dynamique réunissant un frontend réactif propulsé par Vite et un backend Express structuré selon le modèle MVC.
+Bienvenue dans cette présentation détaillée de l'architecture de notre monorepo, qui regroupe un frontend performant basé sur Vite et un backend Express structuré de manière modulaire.
 
-# Structure Générale
+## Structure Générale
 
-Notre projet s'appuie sur une organisation méticuleuse et une sécurisation renforcée dès la racine.
+Notre projet repose sur une organisation rigoureuse et une sécurisation renforcée dès la racine.
 
-Les fichiers cruciaux, `package.json` et `package-lock.json`, sont présents pour orchestrer de manière précise les dépendances et les scripts nécessaires à la cohérence et à la fiabilité du projet.
+Les fichiers essentiels, `package.json` et `package-lock.json`, assurent la gestion précise des dépendances et des scripts nécessaires au bon fonctionnement du projet.
 
-## Gestion des Dépendances
+### Gestion des Dépendances
 
-Dans notre démarche de gestion des dépendances, nous avons intégré avec discernement `husky` pour les hooks Git et `lint-staged` pour les hooks de pré-commit. Ces dépendances renforcent notre pipeline de développement en automatisant les processus de vérification, garantissant ainsi la qualité du code à chaque étape.
+Pour garantir une qualité de code optimale, nous avons intégré plusieurs outils :
 
-## Sécurité Renforcée
+-   **`husky`** : permet d'ajouter des hooks Git pour automatiser certaines actions avant les commits.
+-   **`lint-staged`** : exécute les linters uniquement sur les fichiers modifiés, améliorant ainsi la cohérence du code tout en optimisant les performances du pipeline de développement.
 
-La sécurisation de la racine du projet est une priorité absolue. Les hooks Git ont été judicieusement déployés pour protéger les fichiers essentiels. Vous ne pouvez pas modifier directement les fichiers à la racine du projet, ce qui renforce la stabilité et la sécurité globale.
+### Sécurité et Protection des Fichiers
 
-Cependant, vous bénéficiez d'une totale liberté pour effectuer des modifications dans les répertoires `backend` et `frontend`, offrant ainsi une flexibilité contrôlée dans les domaines spécifiques du développement.
+La sécurisation de la racine du projet est une priorité. Des hooks Git empêchent toute modification directe des fichiers critiques, garantissant ainsi la stabilité et l'intégrité du projet.
 
-Cette structure réfléchie et sécurisée garantit une gestion des dépendances robuste tout en assurant l'intégrité et la confidentialité des configurations essentielles.
+Cependant, les répertoires `server` et `client` restent entièrement modifiables pour offrir une flexibilité adaptée aux développements spécifiques.
 
-## Backend
+## Server
 
 ### Base de Données
 
-La gestion de la base de données est assurée par `client.js` et le schéma SQL défini dans `schema.sql`. Les migrations et le seeding sont gérés par `migrate.js` et `seed.js` respectivement.
+La gestion de la base de données repose sur plusieurs éléments :
 
-:::note
-Le fichier `seed.js` est un script de développement qui permet de remplir la base de données avec des données de test. Il n'est pas nécessaire de l'exécuter pour le fonctionnement du projet.
+-   **`server/database/client.ts`** : gère la connexion à la base de données.
+-   **`schema.sql`** : définit la structure de la base de données.
+-   **Migrations et seeding** :
+    -   `server/bin/migrate.ts` permet d'appliquer les migrations et de mettre à jour la base de données.
+    -   `server/bin/seed.ts` insère des données de test pour le développement.
+
+:::note  
+Le fichier `seed.ts` est un outil de développement permettant de remplir la base avec des données fictives. Son exécution n'est pas requise pour le fonctionnement du projet.  
 :::
 
-### Code Source
+### Architecture du Code
 
-Dans le cœur du backend, le fichier `app.js` assume un rôle central, orchestrant les fonctionnalités principales. Le point d'entrée de notre backend est défini dans le fichier `index.js`, offrant une perspective claire sur l'ensemble de l'application. Nous assurons la qualité du code grâce à une configuration Jest élaborée dans le fichier `jest.config.js`.
+Le backend est conçu selon une architecture modulaire, favorisant la maintenabilité et la scalabilité.
 
-L'architecture modulaire, basée sur le modèle `MVC`, structure notre backend de manière intuitive. Les répertoires clés, tels que `models`, `controllers`, et `services`, sont soigneusement organisés pour favoriser la maintenabilité et la clarté du code. Le fichier de routage, `router.js`, facilite la gestion des chemins au sein de notre application, contribuant ainsi à une expérience de développement fluide.
+#### Structure principale
 
-### Tests
+-   **`src/app.ts`** : Initialise l’application et configure Express.
+-   **`src/main.ts`** : Point d’entrée principal du serveur.
+-   **`src/router.ts`** : Centralise la définition des routes.
+-   **`jest.config.js`** : Configure Jest pour les tests unitaires et d’intégration.
 
-Le répertoire `tests` est dédié aux tests, avec des fichiers spécifiques pour les managers et les routes.
+### Gestion des Tests
 
-Pour nos tests, nous utilisons `supertest` pour les requêtes HTTP, `jest` pour les tests unitaires.
+Les tests sont regroupés dans le répertoire `tests` et couvrent différents aspects du backend :
 
-## Frontend
+-   **Tests des routes** avec `supertest` pour simuler des requêtes HTTP.
+-   **Tests unitaires** avec Jest pour garantir la fiabilité des modules internes.
 
-### Code Source
+## Client
 
-Le frontend, propulsé par Vite, est configuré via `vite.config.js`. Le code source est structuré dans le dossier `src` avec des `composants`, `pages`, et `services` dédiés. L'utilisation de React est mise en avant, avec des fichiers tels que `App.jsx`.
+### Structure du Code
 
-### Ressources Statiques
+Le frontend repose sur Vite pour un développement rapide et performant. Son architecture suit une organisation claire :
 
-Les ressources statiques telles que les images sont gérées dans le répertoire `assets`.
+-   **`vite.config.ts`** : Configuration de Vite.
+-   **`src/`** : Contient l’ensemble du code source, structuré autour de plusieurs dossiers :
+    -   **`components/`** : Composants réutilisables de l’interface.
+    -   **`pages/`** : Pages principales de l’application.
+    -   **`services/`** : Gestion des appels API et logique métier.
+    -   **`types/`** : Définition des types TypeScript.
+-   **`App.tsx`** : Composant principal de l’application React.
+-   **`main.tsx`** : Point d’entrée de l’application React.
 
-### Configuration
+### Gestion des Ressources
 
-La configuration spécifique à Vite est centralisée dans `vite.config.js`.
+-   **`assets/`** : Contient les ressources statiques telles que les images et les icônes.
+
+### Configuration et Développement
+
+La configuration spécifique à Vite est centralisée dans le fichier `vite.config.ts`, garantissant un environnement optimisé pour le développement et le déploiement.
 
 ## Documentation et Organisation
 
-La documentation est un pilier du projet avec le fichier `README.md` fournissant des informations essentielles. L'organisation du projet suit les meilleures pratiques de développement avec une distinction claire entre le frontend et le backend.
+La documentation du projet est centralisée dans le fichier `README.md`, qui fournit des informations essentielles sur l’installation, la configuration et l’utilisation du monorepo.
+
+Le projet est organisé selon les meilleures pratiques, avec une distinction claire entre les parties frontend et backend, assurant ainsi une séparation des responsabilités efficace.
 
 ## Outils et Dépendances
 
-L'utilisation de Jest pour les tests unitaires, de Docker et Docker Compose pour la gestion des conteneurs, ainsi que Vite pour le développement frontend, illustrent l'écosystème riche de notre monorepo.
+L’environnement de développement repose sur plusieurs outils clés :
 
-# Conclusion
+-   **Jest** : Tests unitaires et d’intégration.
+-   **Supertest** : Tests des routes backend.
+-   **Docker et Docker Compose** : Gestion des conteneurs pour le développement et le déploiement.
+-   **Vite** : Développement frontend rapide et optimisé.
 
-En conclusion, cet aperçu de l'architecture de notre monorepo met en lumière la structure, les fonctionnalités clés, et les outils utilisés. Cette documentation complète est conçue pour guider les développeurs à travers l'écosystème, favorisant une compréhension approfondie de chaque composant. N'hésitez pas à explorer davantage chaque section pour une immersion complète dans notre environnement de développement. Bonne exploration !
+## Conclusion
+
+Cette documentation offre un aperçu complet de l’architecture du monorepo, en détaillant sa structure, ses fonctionnalités principales et les outils utilisés.
+
+Chaque section du projet a été pensée pour offrir une expérience de développement fluide et efficace. Pour aller plus loin, il est recommandé d’explorer chaque composant plus en détail afin d’en comprendre pleinement le fonctionnement.
+
+Bonne exploration et bon développement !

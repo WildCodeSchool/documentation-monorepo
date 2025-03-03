@@ -7,94 +7,204 @@ sidebar_label: README.md
 
 ## Concept
 
-Ce template est destiné à servir de base à tous les P2/P3 suivant la structure React-Express-MySQL, telle qu'apprise à la Wild Code School.
-Il est préconfiguré avec un ensemble d'outils qui aideront les étudiants à produire un code de qualité industrielle et plus facile à maintenir, tout en restant un outil pédagogique.
+Ce projet est un **monorepo JavaScript** reposant sur l'architecture **React-Express-MySQL**, conforme aux bonnes pratiques enseignées à la **Wild Code School (v7.1.7)**.
 
-## Configuration et utilisation
+Il est préconfiguré avec un ensemble d'outils permettant aux étudiants de produire du code **de qualité industrielle**, tout en restant un support pédagogique accessible.
 
-### Utilisateurs de Windows
+### Technologies et outils intégrés
 
-Assurez-vous d'exécuter ces commandes dans un terminal git pour éviter les [problèmes avec les formats de nouvelles lignes] (https://en.wikipedia.org/wiki/Newline#Issues_with_different_newline_formats) :
+-   **Concurrently** : Exécution simultanée de plusieurs commandes dans le même terminal.
+-   **Husky** : Exécution de commandes spécifiques déclenchées par des événements Git.
+-   **Vite** : Alternative légère à _Create-React-App_, offrant une expérience de développement plus fluide.
+-   **Biome** : Remplace _ESLint_ et _Prettier_, garantissant un code propre selon des règles prédéfinies.
+-   **Supertest** : Bibliothèque permettant de tester les serveurs HTTP en Node.js.
 
-```
+## Utilisateurs Windows
+
+Pour éviter les problèmes liés aux formats de nouvelles lignes, exécutez les commandes suivantes dans un terminal Git :
+
+```sh
 git config --global core.eol lf
 git config --global core.autocrlf false
 ```
-### Initialisation du projet
 
-- Dans VSCode, installez les plugins **Prettier - Code formatter** et **ESLint** et configurez-les.
-- Clonez ce repo, entrez-y
-- Exécuter la commande `npm install`
-- Créez des fichiers d'environnement (`.env`) dans le `backend` et le `frontend` : vous pouvez copier les fichiers `.env.sample` pour commencer (**ne les supprimez pas**).
+## Installation & Utilisation
 
-### Commandes disponibles
+1. **Installez le plugin Biome** dans VSCode et configurez-le.
+2. **Créez un nouveau projet** :
+    ```sh
+    npm create @this-is-to-learn/js-monorepo@latest <my-project>
+    ```
+    Remplacez `<my-project>` par le nom de votre projet.
+3. **Installez les dépendances** :
+    ```sh
+    npm install
+    ```
+4. **Configurez les fichiers d'environnement** (`.env`) pour `server` et `client`. Utilisez les fichiers `.env.sample` comme modèles (**ne les supprimez pas**).
 
-- `db:migrate` : Exécute le script de migration de base de données
-- `db:seed` : Exécute le script d'amorçage de la base de données
-- `dev` : Démarre les deux serveurs (frontend + backend) dans un seul terminal
-- `dev-front` : Démarre le serveur React frontend
-- `dev-back` : Démarre le serveur backend Express
-- `lint` : Exécute les outils de validation (sera exécuté à chaque _commit_, et refusera le code impur)
+---
+
+## Commandes essentielles
+
+| Commande             | Description                                                    |
+| -------------------- | -------------------------------------------------------------- |
+| `npm install`        | Installe les dépendances du projet (client et serveur).        |
+| `npm run db:migrate` | Applique les migrations pour mettre à jour la base de données. |
+| `npm run dev`        | Démarre simultanément les serveurs frontend et backend.        |
+| `npm run check`      | Exécute les outils de vérification (linting et formatage).     |
+| `npm run test`       | Exécute les tests unitaires et d'intégration.                  |
+
+---
+
+## Structure du projet
+
+```plaintext
+my-project/
+│
+├── server/
+│   ├── app/
+│   │   ├── modules/
+│   │   │   ├── item/
+│   │   │   │   ├── itemActions.ts
+│   │   │   │   └── itemRepository.ts
+│   │   │   └── ...
+│   │   ├── app.ts
+│   │   ├── main.ts
+│   │   └── router.ts
+│   ├── database/
+│   │   ├── client.ts
+│   │   └── schema.sql
+│   ├── tests/
+│   ├── .env
+│   └── .env.sample
+│
+└── client/
+    ├── src/
+    │   ├── components/
+    │   ├── pages/
+    │   └── App.tsx
+    ├── .env
+    └── .env.sample
+```
+
+---
+
+## Bonnes pratiques
+
+### Sécurité
+
+-   Validez et échappez systématiquement les entrées utilisateur.
+-   Utilisez **HTTPS** pour toutes les communications réseau.
+-   Stockez les mots de passe de manière sécurisée avec **Argon2**.
+-   Maintenez les dépendances à jour pour éviter les vulnérabilités.
+
+### Code
+
+-   **Appliquez les principes SOLID** pour une architecture propre et maintenable.
+-   **Utilisez TypeScript** pour bénéficier de la vérification statique des types.
+-   **Adoptez un style de codage cohérent** avec Biome.
+-   **Écrivez des tests** pour toutes les fonctionnalités critiques.
+
+---
 
 ## FAQ
 
-### Outils
+### Déploiement avec Traefik
 
-- _Concurrently_ : Permet à plusieurs commandes de s'exécuter simultanément dans le même CLI
-- Husky_ : Permet d'exécuter des commandes spécifiques qui se déclenchent sur des événements _git_.
-- Vite_ : Alternative à _Create-React-App_, avec moins d'outils pour une expérience plus fluide.
-- _ESLint_ : Outil de "qualité du code", assure que les règles choisies seront appliquées
-- Prettier_ : Outil de "qualité du code" également, se concentre sur le guide de style
-- Airbnb Standard_ : L'un des "standards" les plus connus, même s'il n'est pas officiellement lié à ES/JS.
+> ⚠️ **Prérequis** : Vous devez avoir installé et configuré **Traefik** sur votre VPS. Consultez [VPS Traefik Starter Kit](https://github.com/WildCodeSchool/vps-traefik-starter-kit/) pour les instructions détaillées.
 
-## Déploiement avec Traefik
+Pour configurer le déploiement, ajoutez les **secrets** suivants dans la section `secrets` → `actions` de votre dépôt GitHub :
 
+-   **`SSH_HOST`** : Adresse IP du VPS.
+-   **`SSH_USER`** : Identifiant SSH.
+-   **`SSH_PASSWORD`** : Mot de passe SSH.
 
-> ⚠️ Conditions préalables : Vous devez avoir installé et configuré Traefik sur votre VPS au préalable.
-> https://github.com/WildCodeSchool/vps-traefik-starter-kit/
+Ajoutez également une **variable publique** dans `/settings/variables/actions` :
 
+-   **`PROJECT_NAME`** : Nom du projet utilisé pour générer le sous-domaine.
 
-Pour le déploiement, vous devez aller dans `secrets` → app `actions` sur le repo github pour insérer via `New repository secret` :
+> **Important** : Les underscores (`_`) ne sont pas autorisés, car ils peuvent poser problème avec **Let's Encrypt**.
 
+Votre projet sera accessible à l'adresse :
 
-- SSH_HOST : adresse IP de votre VPS
-- SSH_USER : login SSH de votre VPS
-- SSH_PASSWORD : Mot de passe de connexion SSH à votre VPS
+```plaintext
+https://${PROJECT_NAME}.${subdomain}.wilders.dev/
+```
 
+### Variables d’environnement spécifiques
 
-Et une variable publique de l'onglet `/settings/variables/actions` :
+Les fichiers `.env.sample` contiennent les variables d’environnement nécessaires. Utilisez la convention suivante :
 
+```plaintext
+<PROJECT_NAME>_<SPECIFIC_NAME>=<VALEUR>
+```
 
-- PROJECT_NAME : le nom du projet utilisé pour créer le sous-domaine.
+> **Exemple** :
+>
+> -   `MYAPP_DATABASE_URL=mysql://user:pass@localhost:3306/myapp`
+> -   `MYAPP_API_KEY=abcdef123456`
 
+Pour ajouter ces variables lors du déploiement :
 
-> ⚠️ Attention : les underscores ne sont pas autorisés. Ils peuvent causer des problèmes avec le certificat let's encrypt
+1. Ajoutez la variable dans `docker-compose.prod.yml` :
+    ```yaml
+    environment:
+        - PROJECT_NAME_SPECIFIC_NAME=${PROJECT_NAME_SPECIFIC_NAME}
+    ```
+2. Connectez-vous à votre serveur en SSH et éditez le fichier `.env` de Traefik :
+    ```sh
+    nano ./traefik/data/.env
+    ```
+    Ajoutez la variable et sauvegardez.
 
+Le déploiement prendra alors en compte ces nouvelles configurations.
 
-Utilisez ce même onglet pour ajouter les autres variables d'environnement nécessaires au projet s'il y en a.
+### Logs
 
+Pour suivre les logs en direct sur votre VPS :
 
-Seul le backend sera accessible. Le chemin racine `"/"` redirigera vers le dossier dist de votre frontend. Afin de permettre cela, veuillez décommenter la ligne comme expliqué dans `backend/src/app.js` (Ligne 102).
-Comme le backend servira le frontend, la variable globale VITE_BACKEND_URL sera définie avec une chaîne vide.
+```sh
+ssh user@host
+cd /path/to/project
+docker compose logs -t -f
+```
 
+---
 
-Votre URL sera ` https://${PROJECT-NAME}.${subdomain}.wilders.dev/`.
+## Contribution
 
+### Comment contribuer ?
 
-### A propos de la base de données
+1. **Fork** le dépôt.
+2. **Clonez** votre fork localement :
+    ```sh
+    git clone https://github.com/votre-utilisateur/js-monorepo.git
+    cd js-monorepo
+    ```
+3. Créez une branche pour votre modification :
+    ```sh
+    git switch -c feature/ma-nouvelle-fonctionnalite
+    ```
+4. **Apportez vos modifications** et **committez** :
+    ```sh
+    git commit -m "Ajout d'une nouvelle fonctionnalité"
+    ```
+5. **Poussez** la branche sur votre fork :
+    ```sh
+    git push origin feature/ma-nouvelle-fonctionnalite
+    ```
+6. **Ouvrez une Pull Request** sur le dépôt principal.
 
+### Règles de contribution
 
-La base de données est automatiquement déployée avec le nom de votre repo. Pendant la construction du projet (`docker-entry.sh`), la commande `node migrate.js` est exécutée dans le backend. Si vous voulez ensemencer automatiquement votre base de données en utilisant le script `seed.js`, remplacez la commande _build_ sur votre `backend/package.json` par `node migrate.js && node seed.js`.
+-   **Respectez les standards** de codage en exécutant `npm run check` avant de soumettre votre code.
+-   **Ajoutez des tests** pour toute nouvelle fonctionnalité ou correction de bug.
+-   **Documentez vos modifications** dans la description de la Pull Request.
 
+---
 
-### A propos des ressources publiques (images, polices...)
+## Conclusion
 
+Ce README fournit une vue d’ensemble complète du monorepo, de son installation à son déploiement. L’objectif est d’offrir un environnement de développement fluide et structuré, tout en respectant les bonnes pratiques de développement.
 
-N'utilisez pas de dossier public sur votre frontend. Ce dossier ne sera pas accessible en ligne. Vous pouvez déplacer vos ressources publiques dans le dossier `backend/public`. Préférez [static assets](https://vitejs.dev/guide/assets) lorsque c'est possible.
-
-
-### A propos des logs
-
-
-Si vous voulez accéder aux logs de votre projet en ligne (pour suivre le déploiement ou pour surveiller une erreur de bug), connectez-vous à votre VPS (`ssh user@host`).
-Ensuite, allez sur votre projet spécifique et lancez `docker compose logs -t -f.
+Bonne exploration et bon développement.
