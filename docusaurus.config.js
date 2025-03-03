@@ -8,9 +8,9 @@ import { themes as prismThemes } from "prism-react-renderer";
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-	title: "Harmonia - Documentation",
+	title: "Monorepo JS - Documentation",
 	tagline:
-		"Prise en main du framework Harmonia proposé par la Wild Code School",
+		"Prise en main du framework Monorepo JS proposé par la Wild Code School",
 	favicon: "img/favicon.ico",
 
 	// Set the production url of your site here
@@ -22,7 +22,7 @@ const config = {
 	// GitHub pages deployment config.
 	// If you aren't using GitHub pages, you don't need these.
 	organizationName: "Anthony Gorski", // Usually your GitHub org/user name.
-	projectName: "Harmonia", // Usually your repo name.
+	projectName: "Monorepo JS", // Usually your repo name.
 
 	onBrokenLinks: "ignore",
 	onBrokenMarkdownLinks: "warn",
@@ -59,7 +59,7 @@ const config = {
 		/** @type {import('@docusaurus/preset-classic').ThemeConfig} */
 		({
 			navbar: {
-				title: "Harmonia - Documentation",
+				title: "Monorepo JS - Documentation",
 				logo: {
 					alt: "logo wild code school",
 					src: "img/wcs.png",
@@ -72,7 +72,7 @@ const config = {
 						label: "Introduction",
 					},
 					{
-						href: "https://github.com/WildCodeSchool/create-harmonia",
+						href: "https://github.com/WildCodeSchool/create-Monorepo JS",
 						label: "GitHub",
 						position: "right",
 					},
@@ -95,7 +95,7 @@ const config = {
 						items: [
 							{
 								label: "Github",
-								href: "https://github.com/WildCodeSchool/documentation-harmonia",
+								href: "https://github.com/WildCodeSchool/documentation-Monorepo JS",
 							},
 							{
 								label: "Twitter",

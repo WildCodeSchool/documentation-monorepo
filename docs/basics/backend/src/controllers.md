@@ -1,7 +1,7 @@
 ---
-sidebar_position: 4
+sidebar_position: 2
 sidebar_label: controllers
-pagination_label: src/controllers
+pagination_label: app/controllers
 description: Parlons des controllers
 ---
 
@@ -13,9 +13,9 @@ Les contrôleurs occupent une position centrale dans la gestion de votre applica
 
 Assurez-vous d'importer correctement l'accès aux tables de la base de données, comme illustré dans les exemples ci-dessous :
 
-```js title="backend/src/controllers/<item>Controllers.js"
+```js title="server/app/controllers/<item>Actions.js"
 // Import access to database tables
-const tables = require("../tables");
+const tables = require("../../database/tables");
 ```
 
 :::info
@@ -28,7 +28,7 @@ Ici, tables est un objet qui contient les instances de nos gestionnaires de tabl
 
 La fonction `browse` permet de récupérer tous les éléments de la base de données.
 
-```js title="backend/src/controllers/<item>Controllers.js"
+```js title="server/app/controllers/<item>Actions.js"
 const browse = async (req, res, next) => {
     try {
         const items = await tables.<entity>.readAll();
@@ -43,7 +43,7 @@ const browse = async (req, res, next) => {
 
 La fonction `read` permet de récupérer un élément spécifique basé sur l'ID fourni.
 
-```js title="backend/src/controllers/<item>Controllers.js"
+```js title="server/app/controllers/<item>Actions.js"
 const read = async (req, res, next) => {
     try {
         const item = await tables.<entity>.read(req.params.id);
@@ -63,7 +63,7 @@ const read = async (req, res, next) => {
 
 La fonction `edit` permet de mettre à jour un élément spécifique dans la base de données.
 
-```js title="backend/src/controllers/<item>Controllers.js"
+```js title="server/app/controllers/<item>Actions.js"
 const edit = async (req, res, next) => {
 	const updatedData = req.body;
 	try {
@@ -79,7 +79,7 @@ const edit = async (req, res, next) => {
 
 La fonction `add` permet d'insérer un nouvel élément dans la base de données.
 
-```js title="backend/src/controllers/<item>Controllers.js"
+```js title="server/app/controllers/<item>Actions.js"
 const add = async (req, res, next) => {
     const item = req.body;
     try {
@@ -96,7 +96,7 @@ const add = async (req, res, next) => {
 
 La fonction `destroy` permet de supprimer un élément spécifique de la base de données.
 
-```js title="backend/src/controllers/<item>Controllers.js"
+```js title="server/app/controllers/<item>Actions.js"
 const destroy = async (req, res, next) => {
 	try {
 		await tables.<entity>.delete(req.params.id);

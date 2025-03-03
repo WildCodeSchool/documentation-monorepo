@@ -1,7 +1,7 @@
 ---
-sidebar_position: 5
+sidebar_position: 1
 sidebar_label: models
-pagination_label: src/models
+pagination_label: le dossier models
 description: Parlons des models
 ---
 
@@ -9,17 +9,24 @@ description: Parlons des models
 
 Les modèles sont des classes qui représentent vos entités de la base de données pour les opérations CRUD (Create, Read, Update, Delete). Chaque modèle a accès aux opérations CRUD de nos gestionnaires, facilitant ainsi la gestion des interactions avec les éléments de la base de données.
 
-## AbstractManager
+## AbstractRepository
 
-La classe `AbstractManager` est une classe abstraite qui fournit un accès à quelques opérations CRUD de la base de données. Elle est utilisée comme classe parente pour les modèles de vos entités. Nous avons mis en place cette classe pour vous éviter de répéter le code pour chaque modèle.
+La classe `AbstractRepository` est une classe abstraite qui fournit un accès à quelques opérations CRUD de la base de données. Elle est utilisée comme classe parente pour les modèles de vos entités. Nous avons mis en place cette classe pour vous éviter de répéter le code pour chaque modèle.
 
-```js title="backend/src/models/AbstractManager.js"
+```js title="server/database/models/AbstractRepository.js"
 // Import database client
-const database = require("../../database/client");
+const database = require("../client");
 
-// Provide database access through AbstractManager class
-class AbstractManager {
+// Provide database access through AbstractRepository class
+class AbstractRepository {
 	constructor({ table }) {
+		// thx https://www.codeheroes.fr/2017/11/08/js-classes-abstraites-et-interfaces/
+		if (this.constructor === AbstractRepository) {
+			throw new TypeError(
+				"Abstract class 'AbstractRepository' cannot be instantiated directly"
+			);
+		}
+
 		// Store the table name
 		this.table = table;
 		// Provide access to the database client
@@ -57,23 +64,23 @@ class AbstractManager {
 }
 
 // Ready to export
-module.exports = AbstractManager;
+module.exports = AbstractRepository;
 ```
 
-## ItemManager
+## ItemRepository
 
-La classe `ItemManager` est une classe qui étend la classe `AbstractManager` et qui fournit un accès aux opérations CRUD de la base de données pour une entitée donné.
+La classe `ItemRepository` est une classe qui étend la classe `AbstractRepository` et qui fournit un accès aux opérations CRUD de la base de données pour une entitée donné.
 
 :::info
-`ItemManager` est un exemple, vous devez adapter votre manager à votre entité.
+`ItemRepository` est un exemple, vous devez adapter votre repository à votre entité.
 
-Ex: `UserManager`, `PostManager`, `CommentManager`, etc.
+Ex: `UserRepository`, `PostRepository`, `CommentRepository`, etc.
 :::
 
-```js title="backend/src/models/ItemManager.js"
-const AbstractManager = require("./AbstractManager");
+```js title="server/database/models/ItemRepository.js"
+const AbstractRepository = require("./AbstractRepository");
 
-class ItemManager extends AbstractManager {
+class ItemRepository extends AbstractRepository {
 	constructor() {
 		// Transmet le nom de la table "item" comme configuration
 		super({ table: "item" });
@@ -104,5 +111,5 @@ class ItemManager extends AbstractManager {
 	}
 }
 
-module.exports = ItemManager;
+module.exports = ItemRepository;
 ```

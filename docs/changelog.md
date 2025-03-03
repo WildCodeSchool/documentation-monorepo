@@ -11,7 +11,137 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
--   Nothing right now. [Open an issue](https://github.com/WildCodeSchool/js-template-fullstack/issues) if you find something.
+[Open an issue](https://github.com/WildCodeSchool/create-js-monorepo/issues) if you have any request/feedback :)
+
+## [7.1.7] - 2024-10-28
+
+### Fixed
+
+-   Checked types in addition to biome check.
+
+## [7.1.6] - 2024-10-22
+
+### Fixed
+
+-   Fixed package templates.
+
+## [7.1.5] - 2024-10-19
+
+### Fixed
+
+-   Commented `client/src/main.tsx` to make it more pedagogical.
+
+## [7.1.4] - 2024-10-18
+
+### Fixed
+
+-   Cleaned docker files.
+
+## [7.1.3] - 2024-10-18
+
+### Fixed
+
+-   Fixed double deploy execution in GitHub workflows.
+
+-   Fixed Dockerfile after use of npm workspaces : root directory where `node_modules` belongs wasn't copied.
+
+-   Fixed a variable name in docker-compose files.
+
+## [7.1.2] - 2024-10-15
+
+### Fixed
+
+-   Removed deprecated lines in husky files. Thanks to [Kevin Peset](https://github.com/kpeset) for pointing the issue.
+
+## [7.1.1] - 2024-10-11
+
+### Fixed
+
+-   Fixed error messages in server when client build doesn't exist.
+
+-   Removed mentions to out of date documentation https://wildcodeschool-js-monorepo.vercel.app/.
+
+## [7.1.0] - 2024-10-05
+
+### Added
+
+-   Added native integration of CORS package.
+
+## [7.0.2] - 2024-10-03
+
+### Fixed
+
+-   Fixed type declarations to use `import.meta.env` in client without error. Thanks to [Kevin Peset](https://github.com/kpeset) for the fix.
+
+## [7.0.1] - 2024-09-29
+
+### Changed
+
+-   Renamed package from `@wildcodeschool/create-js-monorepo` (someone created the org before me) to `@this-is-to-learn/create-js-monorepo`.
+
+### Added
+
+-   Added comment about cors types in server.
+
+-   Added middleware example in template README.
+
+-   Added `server/src/types/express/index.d.ts` to extend Express Request type. Thanks to [Kevin Peset](https://github.com/kpeset) for pointing the issue in middleware declarations.
+
+### Fixed
+
+-   Fixed Biome check when there is no files to check. Thanks to [Victorien Elvinger](https://github.com/conaclos) for the answer in Biome discord.
+
+## [7.0.0] - 2024-07-20
+
+### Changed
+
+-   **Breaking change:** Renamed package from `create-harmonia` to `@wildcodeschool/create-js-monorepo`.
+
+-   **Breaking change:** Migrated from ESLint and Prettier to [Biome](https://biomejs.dev/).
+
+-   **Breaking change:** Migrated client and server to TypeScript.
+
+-   **Breaking change:** Refactored server from MVC to module-based architecture.
+
+## [5.0.9] - 2024-05-06
+
+### Added
+
+-   Added `chmod` for husky files during project initialization.
+
+## [5.0.7] - 2024-03-23
+
+### Added
+
+-   Added `commitlint` (disabled by default). Thanks to [Arthur Heurteubise](https://github.com/ArthurHtbk) for the idea.
+
+-   Added`validate-branch-name` (disabled by default). Thanks to [Arthur Heurteubise](https://github.com/ArthurHtbk) for the idea.
+
+### Changed
+
+-   **Breaking change:** Refactored the repository as a `create-<initializer>` package, where `initializer` is **harmonia**. The template files are moved into a new `template` folder.
+
+-   **Breaking change:** Renamed `template/frontend` and `template/backend` folders as `template/client` and `template/server`.
+
+-   **Breaking change:** Splitted server declaration of the routes into `router.js` subfiles in subfolders following URL paths. Thanks to [Ayoub Idrissi Ouedrhiri](https://github.com/ioayoub) for the idea.
+
+-   Moved `template/server/migrate.js` and `template/server/seed.js` into a new `template/server/bin` folder. Updated server scripts accordingly.
+
+-   Managed `template/client` and `template/server` subfolders through [npm workspaces](https://docs.npmjs.com/cli/v10/using-npm/workspaces).
+
+-   **Breaking change:** Renamed database `Manager` classes as `Repository`, and moved them from `template/server/src/models` into `template/server/database/models`. Also moved `template/server/src/tables.js` into `template/server/database/tables.js`.
+
+-   **Breaking change:** Refactored `template/server/database/tables.js` for a manual, explicit instantiation of the repositories.
+
+-   **Breaking change:** Refactored seed system for the database. See `template/server/database/fixtures` for further details.
+
+-   **Breaking change:** Renamed `template/server/controllers/*Controllers.js` files as `template/server/controllers/*Actions.js`. Thanks to [Matthieu Lopez](https://github.com/wildmatthieu) for the idea.
+
+### Fixed
+
+-   Fixed serving of React build from the server. Thanks to [Samuel Faber](https://github.com/samuelfaberdev), [Anthony Gorski](https://github.com/GorskiAnthony) and [Julien Richard](https://github.com/jujuck).
+
+-   Fixed deployment scripts, and improved deployment execution time. Thanks to [Dimitri Lavaury-Collot](https://github.com/Gwada) and [Julien Richard](https://github.com/jujuck).
 
 ## [4.2.0] - 2023-11-30
 
@@ -166,7 +296,7 @@ tables.foo.callSomeCrudMethod();
 
 ### Added
 
--   Git commands for Windows users, to fix issues with different newline formats (see [README.md](README.md#windows-users)).
+-   Git commands for Windows users, to fix issues with different newline formats (see [README.md](template/README.md#windows-users)).
 
 ### Changed
 
