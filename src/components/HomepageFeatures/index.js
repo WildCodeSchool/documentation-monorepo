@@ -8,9 +8,9 @@ const FeatureList = [
 		Svg: require("@site/static/img/undraw_front.svg").default,
 		description: (
 			<>
-				Explorez la conception du frontend avec Harmonia, un framework
-				utilisant React coté frontend, et découvrez comment l'utiliser
-				de manière appropriée.
+				Explorez la conception du frontend avec le monorepo, un
+				framework utilisant React coté client, et découvrez comment
+				l'utiliser de manière appropriée.
 			</>
 		),
 	},
@@ -20,7 +20,7 @@ const FeatureList = [
 		description: (
 			<>
 				Facilitez la communication entre les parties Client & Server de
-				notre application Harmonia en utilisant une API REST.
+				notre application en utilisant une API REST.
 			</>
 		),
 	},
@@ -29,7 +29,7 @@ const FeatureList = [
 		Svg: require("@site/static/img/undraw_back.svg").default,
 		description: (
 			<>
-				Explorez la conception du server avec Harmonia, basé sur le
+				Explorez la conception du server avec le monorepo, basé sur le
 				micro framework Express, et découvrez comment l'utiliser de
 				manière adéquate.
 			</>
