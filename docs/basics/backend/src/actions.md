@@ -7,7 +7,9 @@ description: Prise en main du fichier <entity>Actions.ts
 
 # `<entity>Actions.ts`
 
-Ce fichier permet de définir les actions de notre entité, dans le monorepo, celui de base est item.
+:::info
+`<entity>` ici est un mot générique pour définir le nom de vos entités, à l'initialisation du monorepo, nous n'avons que `item` dans nos actions.
+:::
 
 Les actions (ou contrôleurs) occupent une position centrale dans la gestion de votre application, utilisant l'acronyme `B. R. E. A. D.` pour structurer nos opérations. Chaque contrôleur a accès aux opérations CRUD de nos gestionnaires, facilitant ainsi la gestion des interactions avec les éléments de la base de données.
 

@@ -21,3 +21,15 @@ server/src/modules/
 ```
 
 Parlons de chaque fichier dans les sections suivantes 😁
+
+:::note
+Dans les prochaines sections, vous allez rencontrer la syntaxe suivante :
+
+`<entity>Actions.ts` ou `<entity>Repository.ts`, ici, `<entity>` défini un nom générique lié à vos entités.
+
+Par exemple, à l'initialisation du monorepo, nous n'avons que `item` qui est initialisé, du coup, nous avons :
+
+-   itemActions.ts
+-   itemRepository.ts
+
+:::

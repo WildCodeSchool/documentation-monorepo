@@ -7,28 +7,23 @@ Le dossier `database` contient les fichiers et dossiers qui permettent de mettre
 ## Contenu du dossier
 
 ```txt
-database
-├── client.js
+server/database/
+├── checkConnection.ts
+├── client.ts
 ├── fixtures
-│   ├── AbstractSeeder.js
-│   ├── ItemSeeder.js
-│   └── UserSeeder.js
-├── models
-│   ├── AbstractRepository.js
-│   └── ItemRepository.js
-├── schema.sql
-└── tables.js
+│   ├── AbstractSeeder.ts
+│   ├── ItemSeeder.ts
+│   └── UserSeeder.ts
+└── schema.sql
 
-3 directories, 8 files
+2 directories, 6 files
 ```
 
 ### Détails
 
-1. **client.js**
+1. **client.ts**
     - Permet de configurer et de se connecter à la base de données.
 2. **schema.sql**
     - Contient le schéma de la base de données.
 3. **fixtures**
     - Permet de générer des données de test pour la base de données.
-4. **models**
-    - Permet de définir les modèles de données pour les différentes tables de la base de données.

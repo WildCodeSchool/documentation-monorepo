@@ -15,7 +15,7 @@ Créez un fichier `<entity>Repository.ts` dans le dossier `modules/<entity>` de
 votre application.
 
 :::info
-`<entity>` est le nom de votre entité.
+`<entity>` ici est un mot générique pour définir le nom de vos entités, à l'initialisation du monorepo, nous n'avons que `item` dans nos actions.
 :::
 
 Assurez-vous que chaque fichier `<entity>Repository.ts` contient les deux import suivant :
@@ -30,11 +30,11 @@ import type { Result, Rows } from "../../../database/client";
 
 ## Opérations du Repository
 
-Le fichier `<entity>Repository.ts` contient les opérations de base de données dans un classe qui porte le même nom que l'entité.
+Le fichier `<entity>Repository.ts` contient les opérations de base de données dans une classe qui porte le même nom que l'entité.
 
-```ts title="server/src/modules/<entity>/<entity>Repository.ts"
-// Nous devons définir le type de notre entité
-
+```ts title="server/src/modules/item/itemRepository.ts"
+// Nous devons définir le type de notre entité,
+// nous allons prendre item pour exemple.
 type Item = {
 	id: number;
 	title: string;
