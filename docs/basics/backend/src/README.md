@@ -1,26 +1,27 @@
-# Parlons du dossier `app`
+# Parlons du dossier `src`
 
-## Le dossier `app` et l'architecture MVC
+## Le dossier `src` et l'architecture modulaire
 
-Le dossier `app` contient les fichiers et dossiers qui permettent de mettre en place le début de l'architecture MVC (Modèle-Vue-Contrôleur) de notre application server. Cette architecture permet de séparer les données, la logique métier et l'interface utilisateur.
+Le dossier `src` contient les fichiers et dossiers qui permettent de mettre en place le début de l'architecture modulaire de notre application server. Cette architecture permet de séparer les données, la logique métier et l'interface utilisateur.
 
-En sachant que n'utilisons pas de vue dans notre application, nous n'aurons pas de dossier `views`. Celui-ci est remplacé par notre dossier `client` de notre framework.
+En sachant que n'utilisons pas de vue dans notre application, nous n'aurons pas de dossier dédiée. Celui-ci est remplacé par notre dossier `client` de notre framework.
 
 ## Contenu du dossier
 
 ```txt
-app
-├── config.js
-├── controllers
-│   └── itemActions.js
-├── routers
-│   └── api
-│       ├── items
-│       │   └── router.js
-│       └── router.js
-└── services
+server/src/
+├── app.ts
+├── main.ts
+├── modules
+│   └── item
+│       ├── itemActions.ts
+│       └── itemRepository.ts
+├── router.ts
+└── types
+    └── express
+        └── index.d.ts
 
-6 directories, 4 files
+5 directories, 6 files
 ```
 
 C'est parti pour la description de chaque fichier et dossier !

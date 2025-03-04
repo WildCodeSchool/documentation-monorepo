@@ -9,6 +9,8 @@ description: Prise en main du fichier App.tsx
 
 Notre `App.tsx` que nous avons par défaut, est le composant principal de notre application. Il est responsable de l'affichage de notre application.
 
+Vous pouvez sans problème modifier ce composant pour y ajouter votre propre contenu.
+
 :::note
 
 Je vous rappel le contenu de notre fichier `main.jsx` :

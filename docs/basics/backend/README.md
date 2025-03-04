@@ -12,62 +12,50 @@ Bienvenue dans l'architecture server de notre application, conçue pour offrir d
 ## Architecture
 
 ```textmate title="server/"
-server
-├── app
-│   ├── config.js
-│   ├── controllers
-│   │   └── itemActions.js
-│   ├── routers
-│   │   └── api
-│   │       ├── items
-│   │       │   └── router.js
-│   │       └── router.js
-│   └── services
+server/
 ├── bin
-│   ├── migrate.js
-│   └── seed.js
+│   ├── migrate.ts
+│   └── seed.ts
 ├── database
-│   ├── client.js
+│   ├── checkConnection.ts
+│   ├── client.ts
 │   ├── fixtures
-│   │   ├── AbstractSeeder.js
-│   │   ├── ItemSeeder.js
-│   │   └── UserSeeder.js
-│   ├── models
-│   │   ├── AbstractRepository.js
-│   │   └── ItemRepository.js
-│   ├── schema.sql
-│   └── tables.js
-├── index.js
-├── jest.config.js
-├── package.json
+│   │   ├── AbstractSeeder.ts
+│   │   ├── ItemSeeder.ts
+│   │   └── UserSeeder.ts
+│   └── schema.sql
+├── jest.config.ts
+├── package.tson
 ├── public
 │   └── assets
 │       └── images
 │           └── favicon.png
-└── tests
-    ├── config.js
-    ├── install.test.js
-    └── items
-        ├── repository.spec.js
-        └── routes.spec.js
+├── src
+│   ├── app.ts
+│   ├── main.ts
+│   ├── modules
+│   │   └── item
+│   │       ├── itemActions.ts
+│   │       └── itemRepository.ts
+│   ├── router.ts
+│   └── types
+│       └── express
+│           └── index.d.ts
+├── tests
+│   ├── install.test.ts
+│   └── item
+│       └── routes.spec.ts
+└── tsconfig.tson
 
-16 directories, 22 files
+14 directories, 20 files
 ```
 
 ### Détails
 
-### 1. **app**
+### 1. **bin**
 
--   **config.js**: Organise et orchestre les différentes parties.
--   **controllers**: Gestionnaires des requêtes et de la logique métier.
--   **routers/api**: Routage pour les points d'API.
--   **services**: Services fournissant des fonctionnalités spécifiques.
-    -   Ce dossier contient des fichiers tels que les middlewares, les validateurs, etc.
-
-### 2. **bin**
-
--   **migrate.js**: Script pour créer les tables de la base de données contenues dans `database/schema.sql`.
--   **seed.js**: Script pour insérer des données dans la base de données.
+-   **migrate.ts**: Script pour créer les tables de la base de données contenues dans `database/schema.sql`.
+-   **seed.ts**: Script pour insérer des données dans la base de données.
 
 :::note
 Pour lancer les scripts de migration et de seeding, vous pouvez exécuter les commandes suivantes :
@@ -84,33 +72,40 @@ npm run db:seed
 
 :::
 
-### 3. **database**
+### 2. **database**
 
--   **client.js**: Configuration du client de base de données et permet de se connecter.
+-   **client.ts**: Configuration du client de base de données et permet de se connecter.
 -   **schema.sql**: Définition du schéma de la base de données.
-
     -   Ce fichier est simplement la structure de notre base de données, définissant les tables et les colonnes.
-
--   **tables.js**: Gestionnaires de données pour notre database.
--   **models**: Modèles définissant la structure des données.
-    -   Contient les fichiers de modèles pour chaque table de la base de données.
-    -   Syntaxe : `ExempleRepository.js`.
 -   **fixtures**: Données de test pour la base de données.
-    -   Contient les fichiers de données de test pour chaque table de la base de données.
-    -   Syntaxe : `ExempleSeeder.js`.
+    -   Contient les fichiers de données pour alimenter chaque table de la base de données.
+    -   Les fichiers de données sont des classes qui héritent de `AbstractSeeder` et implémentent la méthode `run`.
 
 ### 3. **public**
 
 -   **assets**: Répertoire pour les ressources statiques, telles que des images.
 
-### 4. **tests**
+### 4. **src**
+
+-   **main.ts**: Initialisation de l'application.
+-   **app.ts**: Point d'entrée de l'application, qui configure les middlewares, les routes, etc.
+-   **router.ts**: Routage pour les points d'API.
+-   **types**: Définitions de types personnalisés.
+-   **modules**: Contient les modules de l'application.
+    -   Un module est un dossier qui contient l'ensemble des fichiers qui gèrent une entitée spécifique.
+    -   Chaque module contient les fichiers suivants :
+        -   **actions.ts**: Définit les actions possibles pour l'entité.
+        -   **repository.ts**: Gère les requêtes à la base de données pour l'entité.
+
+:::info
+
+Il faut bien comprendre que chaque module est une entité de notre application. Par exemple, si nous avons une entité `User`, nous aurons un module `user` qui contiendra les fichiers `userActions.ts` et `userRepository.ts`.
+
+:::
+
+### 5. **tests**
 
 -   Tests unitaires et de bout en bout organisés par fonctionnalité.
-
-### 5. **index.js** / **migrate.js** / **seed.js**
-
--   **index.js**: Point d'entrée de l'application, celui-ci fera appel à `app/config.js` et testera la connexion à la base de données.
--   **jest.config.js**: Configuration des tests unitaires.
 
 ## Points Clés
 
@@ -124,4 +119,4 @@ npm run db:seed
 
 Cette architecture a été pensée pour optimiser le développement, assurer la maintenabilité du code et permettre une évolution continue de notre server. N'hésitez pas à explorer chaque dossier pour une compréhension approfondie de notre structure organisée et efficace.
 
-Parlons maintenant de notre dossier `app` et plus particulièrement du fichier `config.js`.
+Parlons maintenant de notre dossier `src` et plus particulièrement du fichier `app.ts`.

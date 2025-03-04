@@ -1,39 +1,35 @@
 ---
-sidebar_position: 3
-sidebar_label: router.js
-pagination_label: app/routers/api/router.js
-description: Prise en main du fichier router.js
+sidebar_position: 5
+sidebar_label: router.ts
+pagination_label: src/router.ts
+description: Prise en main du fichier router.ts
 ---
 
-# router.js
+# router.ts
 
 Ce fichier permet de définir toutes nos routes de l'API.
 
 ## Usage
 
-Nous allons importer nos contrôleurs et définir nos routes ici.
+Nous allons importer nos actions et définir nos routes ici.
 
-```js title="server/app/routers/api/router.js"
-const express = require("express");
+```ts title="server/src/router.ts"
+import express from "express";
+
 const router = express.Router();
 
 /* ************************************************************************* */
-// Import And Use Routers Here
+// Define Your API Routes Here
 /* ************************************************************************* */
 
-const itemsRouter = require("./items/router");
+// Define item-related routes
+import itemActions from "./modules/item/itemActions";
 
-router.use("/items", itemsRouter);
+router.get("/api/items", itemActions.browse);
+router.get("/api/items/:id", itemActions.read);
+router.post("/api/items", itemActions.add);
 
 /* ************************************************************************* */
 
-module.exports = router;
+export default router;
 ```
-
-:::note
-Le router se divise en plusieurs parties, en effet, pour une meilleure organisation, chaque partie du router est séparée dans un dossier spécifique. Ces dossiers contiendront des fichiers `router.js` sont ensuite importés dans le fichier principal `router.js`.
-
-Ex: `routers/api/items/router.js`, `routers/api/users/router.js`, `routers/api/auth/router.js`, etc.
-
-Le fichier `router.js` principal se trouve dans `routers/api/router.js` et importe tous les autres fichiers `router.js` des dossiers spécifiques.
-:::

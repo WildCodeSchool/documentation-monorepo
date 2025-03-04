@@ -1,30 +1,30 @@
 ---
 sidebar_position: 1
-sidebar_label: config.js
-pagination_label: app/config.js
-description: Prise en main du fichier config.js
+sidebar_label: app.js
+pagination_label: src/app.js
+description: Prise en main du fichier app.js
 ---
 
-# config.js
+# app.ts
 
 Ce fichier est le point d'entrée de notre application. Il permet de mettre en place notre serveur et d'orchestrer les différentes parties de notre application.
 
-```js title="server/app/config.js"
+```ts title="server/src/app.ts"
 // Appel des modules nécessaires, notamment Express
-const express = require("express");
+import express from "express";
 const app = express();
 
-// Nous appelons ici le fichier router.js qui contient toutes nos routes del'API
-const apiRouter = require("./routers/api/router");
+// Nous appelons ici le fichier router.ts qui contient toutes nos routes de l'API
+import router from "./router";
 
-// Toutes nos routes sont accessibles via le préfixe /api
-app.use("/api", apiRouter);
+// Toutes nos routes sont accessibles
+app.use(router);
 
 // Export de l'application qui sera utilisée dans index.js
 module.exports = app;
 ```
 
-Voilà la syntaxe de base de notre fichier `config.js`. Nous importons Express, nous créons une instance de notre application, nous importons notre fichier `router.js` qui se trouve dans le dossier `routers/api` et nous exportons notre application qui sera utilisée dans notre fichier `index.js`.
+Voilà la syntaxe de base de notre fichier `app.ts`. Nous importons Express, nous créons une instance de notre application, nous importons notre fichier `router.ts` et nous exportons notre application qui sera utilisée dans notre fichier `index.js`.
 
 ## les CORS
 
@@ -36,14 +36,14 @@ Par exemple, le site `https://www.mon-super-site.com` ne peut pas charger des re
 
 L'intégration des CORS dans notre application autorise spécifiquement le chargement de ressources entre différents domaines. Toutefois, il est crucial d'adopter une approche prudente lors de la configuration des `CORS`, car ils peuvent présenter des risques pour la sécurité de notre application. Ainsi, nous allons les paramétrer de manière sécurisée.
 
-```bash
+```sh
 # Téléchargement du module cors
 npm install cors
 ```
 
-```js title="server/app/config.js"
+```ts title="server/src/app.ts"
 // Appel des modules nécessaires, notamment cors
-const cors = require("cors");
+import cors from "cors";
 
 app.use(cors());
 ```
@@ -54,29 +54,32 @@ La façon dont nous avons paramétré les `CORS` est très permissive. C'est ass
 
 Nous allons maintenant, ajouter des règles pour nos `CORS` :
 
-```js title="server/app/config.js"
+```ts title="server/src/app.ts"
 // Appel des modules nécessaires, notamment cors
-const cors = require("cors");
+import cors from "cors";
 
 // Définition des options pour les CORS
 const corsOptions = {
 	origin: [
-		process.env.FRONTEND_URL, //garder celui-ci, après avoir vérifié la valeur dans `backend/.env`,
+		process.env.FRONTEND_URL, //garder celui-ci, après avoir vérifié la valeur dans `server/.env`,
 		// ajouter les autres URL autorisées à accéder à notre API
 	],
 };
 
-app.use(cors(corsOptions));
+if (process.env.CLIENT_URL != null) {
+	app.use(cors(corsOptions));
+}
 ```
 
 <details>
 <summary>Code avec CORS</summary>
 
-```js title="server/app/config.js"
+```ts title="server/src/app.ts"
 // Appel des modules nécessaires, notamment express
-const express = require("express");
+import express from "express";
 const app = express();
-const cors = require("cors");
+
+import cors from "cors";
 
 // Définition des options pour les CORS
 const corsOptions = {
@@ -87,13 +90,15 @@ const corsOptions = {
 };
 
 // Ajout du middleware express.json()
-app.use(cors(corsOptions));
+if (process.env.CLIENT_URL != null) {
+	app.use(cors(corsOptions));
+}
 
-// Nous appelons ici le fichier router.js qui contient toutes nos routes del'API
-const apiRouter = require("./routers/api/router");
+// Nous appelons ici le fichier router.ts qui contient toutes nos routes de l'API
+import router from "./router";
 
-// Toutes nos routes sont accessibles via le préfixe /api
-app.use("/api", apiRouter);
+// Toutes nos routes sont accessibles
+app.use(router);
 
 // Export de l'application qui sera utilisée dans index.js
 module.exports = app;
@@ -105,7 +110,7 @@ module.exports = app;
 
 Nous avons besoin d'ajouter un `middleware` pour que notre application puisse lire les données envoyées par le client. Pour cela, nous allons utiliser le middleware `express.json()`. Tant que le type de données envoyées par le client est `application/json`, le middleware `express.json()` va transformer les données en objet JavaScript et les ajouter à la propriété `body` de l'objet `request`.
 
-```js title="server/app/config.js"
+```ts title="server/src/app.ts"
 // Ajout du middleware express.json()
 app.use(express.json());
 ```
@@ -113,11 +118,12 @@ app.use(express.json());
 <details>
 <summary>Code avec `express.json`</summary>
 
-```js title="server/app/config.js"
+```ts title="server/src/app.ts"
 // Appel des modules nécessaires, notamment express
-const express = require("express");
+import express from "express";
 const app = express();
-const cors = require("cors");
+
+import cors from "cors";
 
 // Définition des options pour les CORS
 const corsOptions = {
@@ -128,16 +134,18 @@ const corsOptions = {
 };
 
 // Ajout du middleware express.json()
-app.use(cors(corsOptions));
+if (process.env.CLIENT_URL != null) {
+	app.use(cors(corsOptions));
+}
 
-// Nous appelons ici le fichier router.js qui contient toutes nos routes del'API
-const apiRouter = require("./routers/api/router");
+// Nous appelons ici le fichier router.ts qui contient toutes nos routes de l'API
+import router from "./router";
 
 // Ajout du middleware express.json()
 app.use(express.json());
 
-// Toutes nos routes sont accessibles via le préfixe /api
-app.use("/api", apiRouter);
+// Toutes nos routes sont accessibles
+app.use(router);
 
 // Export de l'application qui sera utilisée dans index.js
 module.exports = app;
@@ -168,8 +176,8 @@ npm install cookie-parser
 
 Une fois le module `cookie-parser` installé, vous pouvez l'importer dans votre application Express et l'utiliser comme middleware :
 
-```js title="server/app/config.js"
-const cookieParser = require("cookie-parser");
+```ts title="server/src/app.ts"
+import cookieParser from "cookie-parser";
 
 // Ajout du middleware cookie-parser
 app.use(cookieParser());
@@ -178,12 +186,12 @@ app.use(cookieParser());
 <details>
 <summary>Code avec cookieParser</summary>
 
-```js title="server/app/config.js"
+```ts title="server/src/app.ts"
 // Appel des modules nécessaires, notamment express
-const express = require("express");
+import express from "express";
 const app = express();
-const cors = require("cors");
-const cookieParser = require("cookie-parser");
+
+import cors from "cors";
 
 // Définition des options pour les CORS
 const corsOptions = {
@@ -194,19 +202,24 @@ const corsOptions = {
 };
 
 // Ajout du middleware express.json()
-app.use(cors(corsOptions));
+if (process.env.CLIENT_URL != null) {
+	app.use(cors(corsOptions));
+}
 
-// Nous appelons ici le fichier router.js qui contient toutes nos routes del'API
-const apiRouter = require("./routers/api/router");
-
-// Ajout du middleware express.json()
-app.use(express.json());
+// Import du module cookie-parser
+import cookieParser from "cookie-parser";
 
 // Ajout du middleware cookie-parser
 app.use(cookieParser());
 
-// Toutes nos routes sont accessibles via le préfixe /api
-app.use("/api", apiRouter);
+// Nous appelons ici le fichier router.ts qui contient toutes nos routes de l'API
+import router from "./router";
+
+// Ajout du middleware express.json()
+app.use(express.json());
+
+// Toutes nos routes sont accessibles
+app.use(router);
 
 // Export de l'application qui sera utilisée dans index.js
 module.exports = app;
@@ -218,7 +231,7 @@ Maintenant, nous pouvons utiliser les cookies dans notre application.
 
 On l'utilise de la manière suivante :
 
-```js title="server/app/config.js"
+```ts title="server/src/app.ts"
 // Utilisation de la méthode res.cookie()
 // Exemple : Définir un cookie nommé "username" avec la valeur "john" et une durée de validité de 7 jours
 res.cookie("username", "john", {
@@ -235,14 +248,16 @@ res.clearCookie("username");
 
 Un middleware de gestion des erreurs est une composante essentielle dans une application Express, permettant de capturer et de traiter les erreurs survenues lors du traitement des requêtes. Ce middleware devrait être défini en dernier, après les autres appels à `app.use()` et aux routes.
 
-Pour activer le middleware de gestion des erreurs, décommentez le code suivant dans votre fichier Express (généralement `server/config.js`):
+Pour activer le middleware de gestion des erreurs, décommentez le code suivant dans votre fichier Express (généralement `server/app.ts`):
 
 ```javascript
 // Middleware for Error Logging
 // Important: Error-handling middleware should be defined last, after other app.use() and routes calls.
 
+import type { ErrorRequestHandler } from "express";
+
 // Define a middleware function to log errors
-const logErrors = (err, req, res, next) => {
+const logErrors: ErrorRequestHandler = (err, req, res, next) => {
 	// Log the error to the console for debugging purposes
 	console.error(err);
 	console.error("on req:", req.method, req.path);
